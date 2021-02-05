@@ -1,3 +1,9 @@
 ---
+roles:
+  - src: geerlingguy.firewall
+  - src: geerlingguy.php
+  - src: geerlingguy.composer
+
 collections:
   - name: ansible.posix
+  - name: community.general

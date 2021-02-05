@@ -1,0 +1,9 @@
+---
+# Workaround to gather facts in certain scenarios when filtering based on tags.
+# https://github.com/ansible/ansible/issues/57529#issuecomment-513143430
+- hosts: all
+
+- hosts: all
+  become: true
+  tasks:
+    - import_tasks: tasks/packages.yml

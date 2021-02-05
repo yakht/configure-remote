@@ -1,0 +1,4 @@
+---
+- name: Add PPA for git for latest releases
+  ansible.builtin.apt_repository:
+    repo: ppa:git-core/ppa

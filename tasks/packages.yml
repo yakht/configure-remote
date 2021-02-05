@@ -1,0 +1,10 @@
+---
+- name: Add package repositories
+  import_tasks: packages-Debian.yml
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install packages
+  package:
+    name:
+      - git
+    state: latest
