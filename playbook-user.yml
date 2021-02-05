@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/create-user.yml
+
+  tasks:
+    - name: Create user for later runs
+      user:
+        name: "{{ username }}"
+        state: present
+        groups: "admin,sudo"
+        shell: "/bin/bash"
+
+    - name: Allow user to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: "^{{ username }}"
+        line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+        validate: "visudo -cf %s"
+
+    - name: Add public key to authorized keys
+      ansible.posix.authorized_key:
+        user: "{{ username }}"
+        state: present
+        key: "{{ item }}"
+      with_file: "{{ user_public_key_files }}"
