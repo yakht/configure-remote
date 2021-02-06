@@ -6,6 +6,7 @@ php_packages:
   - php{{ php_default_version_debian }}-dev
   - libpcre3-dev
   - php{{ php_default_version_debian }}-curl
+  - php{{ php_default_version_debian }}-gd
   - php{{ php_default_version_debian }}-imap
   - php{{ php_default_version_debian }}-json
   - php{{ php_default_version_debian }}-opcache
