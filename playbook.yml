@@ -5,7 +5,8 @@
 
 - hosts: all
   tasks:
-    - command: whoami
+    - name: Run whoami to determine username
+      command: whoami
       register: username
     - set_fact:
         username: "{{ username.stdout }}"
