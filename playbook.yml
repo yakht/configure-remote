@@ -35,3 +35,9 @@
 - hosts: all
   tasks:
     - import_tasks: tasks/fishshell.yml
+
+- hosts: all
+  vars_files:
+    - vars/lando.yml
+  tasks:
+    - import_tasks: tasks/lando.yml

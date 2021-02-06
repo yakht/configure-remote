@@ -1,0 +1,14 @@
+---
+- name: Install Lando
+  become: true
+  ansible.builtin.apt:
+    deb: "https://files.devwithlando.io/lando-stable.deb"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Configure Lando
+  ansible.builtin.template:
+    src: templates/lando.yml.j2
+    dest: "/home/{{ username }}/.lando/config.yml"
+    force: yes
+    owner: "{{ username }}"
+    mode: 0644

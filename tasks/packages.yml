@@ -27,8 +27,3 @@
 
 - name: Install Docker
   import_tasks: docker.yml
-
-- name: Install Lando
-  ansible.builtin.apt:
-    deb: "https://files.devwithlando.io/lando-stable.deb"
-  when: ansible_facts['os_family'] == "Debian"
