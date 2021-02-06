@@ -11,6 +11,7 @@
       - ca-certificates
       - curl
       - gnupg-agent
+      - mosh
       - software-properties-common
       - wget
       - zip
