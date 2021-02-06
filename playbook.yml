@@ -4,6 +4,13 @@
 - hosts: all
 
 - hosts: all
+  tasks:
+    - command: whoami
+      register: username
+    - set_fact:
+        username: "{{ username.stdout }}"
+
+- hosts: all
   become: true
   tasks:
     - import_tasks: tasks/packages.yml

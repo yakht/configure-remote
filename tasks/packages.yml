@@ -3,8 +3,17 @@
   import_tasks: packages-Debian.yml
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Install packages
+- name: Install base packages
   package:
     name:
       - git
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+      - wget
     state: latest
+
+- name: Install Docker
+  import_tasks: docker.yml

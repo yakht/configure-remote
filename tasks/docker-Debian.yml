@@ -1,0 +1,23 @@
+---
+- name: Differentiate Ubuntu and Debian
+  set_fact:
+    debian_name: "{{ ansible_facts['distribution']|lower }}"
+
+- name: Add Docker’s official GPG key
+  ansible.builtin.apt_key:
+    url: "https://download.docker.com/linux/{{ debian_name }}/gpg"
+    state: present
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: "deb https://download.docker.com/linux/{{ debian_name }} {{ ansible_facts['lsb']['codename'] }} stable"
+    state: present
+
+- name: Run apt-get update
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: true
