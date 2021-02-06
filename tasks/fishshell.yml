@@ -31,9 +31,17 @@
   command: /tmp/starship-installer.sh --yes
 
 - name: Allow user to have passwordless sudo
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: ~/.config/fish/config.fish
     state: present
     create: true
     regexp: "^starship"
     line: "starship init fish | source"
+
+- name: Remove installer files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /tmp/omf
+    - /tmp/starship-installer.sh
