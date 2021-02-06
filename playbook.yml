@@ -14,3 +14,19 @@
   become: true
   tasks:
     - import_tasks: tasks/packages.yml
+
+- hosts: all
+  become: true
+  name: Install PHP and composer
+
+  vars_files:
+    - vars/php.yml
+
+  pre_tasks:
+    - name: Add repository for packages
+      ansible.builtin.apt_repository:
+        repo: ppa:ondrej/php
+
+  roles:
+    - { role: geerlingguy.php, tags: ["php"] }
+    - { role: geerlingguy.composer, tags: ["composer"] }
