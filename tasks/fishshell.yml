@@ -1,0 +1,39 @@
+---
+- become: true
+  import_tasks: fishshell-Ubuntu.yml
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Find fish shell path
+  command: "which fish"
+  register: fish_path
+
+- name: Change default shell
+  user:
+    name: "{{ username }}"
+    shell: "{{ fish_path.stdout }}"
+
+- name: Get OMF installer
+  ansible.builtin.git:
+    repo: https://github.com/oh-my-fish/oh-my-fish
+    dest: /tmp/omf
+
+- name: Get starship installer
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship-installer.sh
+    mode: 0777
+
+- name: Install OMF
+  command: fish /tmp/omf/bin/install --offline --yes --noninteractive
+
+- name: Install starship
+  become: true
+  command: /tmp/starship-installer.sh --yes
+
+- name: Allow user to have passwordless sudo
+  lineinfile:
+    dest: ~/.config/fish/config.fish
+    state: present
+    create: true
+    regexp: "^starship"
+    line: "starship init fish | source"

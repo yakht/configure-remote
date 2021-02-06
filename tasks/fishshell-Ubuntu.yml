@@ -1,0 +1,11 @@
+---
+- name: Add fish-shell repository
+  ansible.builtin.apt_repository:
+    repo: ppa:fish-shell/release-3
+    state: present
+
+- name: Run apt-get update
+  apt:
+    name: fish
+    state: present
+    update_cache: true

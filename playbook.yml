@@ -31,3 +31,7 @@
   roles:
     - { role: geerlingguy.php, tags: ["php"] }
     - { role: geerlingguy.composer, tags: ["composer"] }
+
+- hosts: all
+  tasks:
+    - import_tasks: tasks/fishshell.yml
