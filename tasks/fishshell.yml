@@ -30,7 +30,7 @@
   become: true
   command: /tmp/starship-installer.sh --yes
 
-- name: Allow user to have passwordless sudo
+- name: Add starship to fish-shell
   ansible.builtin.lineinfile:
     dest: ~/.config/fish/config.fish
     state: present
