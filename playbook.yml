@@ -18,9 +18,10 @@
 
 - hosts: all
   become: true
-  name: Install PHP and composer
+  name: Install NodeJS, PHP, and composer
 
   vars_files:
+    - vars/nodejs.yml
     - vars/php.yml
 
   pre_tasks:
@@ -31,6 +32,7 @@
   roles:
     - { role: geerlingguy.php, tags: ["php"] }
     - { role: geerlingguy.composer, tags: ["composer"] }
+    - { role: geerlingguy.nodejs, tags: ["nodejs"] }
 
 - hosts: all
   tasks:

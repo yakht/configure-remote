@@ -3,6 +3,7 @@ roles:
   - src: geerlingguy.firewall
   - src: geerlingguy.php
   - src: geerlingguy.composer
+  - src: geerlingguy.nodejs
 
 collections:
   - name: ansible.posix
