@@ -35,8 +35,11 @@
     - { role: geerlingguy.nodejs, tags: ["nodejs"] }
 
 - hosts: all
+  vars_files:
+    - vars/yakht.yml
   tasks:
     - import_tasks: tasks/fishshell.yml
+      when: install_shell == "fish"
 
 - hosts: all
   vars_files:

@@ -17,18 +17,20 @@
     repo: https://github.com/oh-my-fish/oh-my-fish
     dest: /tmp/omf
 
+- name: Install OMF
+  command: fish /tmp/omf/bin/install --offline --yes --noninteractive
+
 - name: Get starship installer
   get_url:
     url: https://starship.rs/install.sh
     dest: /tmp/starship-installer.sh
     mode: 0777
-
-- name: Install OMF
-  command: fish /tmp/omf/bin/install --offline --yes --noninteractive
+  when: install_starship == true
 
 - name: Install starship
   become: true
   command: /tmp/starship-installer.sh --yes
+  when: install_starship == true
 
 - name: Add starship to fish-shell
   ansible.builtin.lineinfile:
@@ -37,6 +39,7 @@
     create: true
     regexp: "^starship"
     line: "starship init fish | source"
+  when: install_starship == true
 
 - name: Remove installer files
   ansible.builtin.file:
