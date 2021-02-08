@@ -4,6 +4,7 @@ roles:
   - src: geerlingguy.php
   - src: geerlingguy.composer
   - src: geerlingguy.nodejs
+  - src: geerlingguy.swap
 
 collections:
   - name: ansible.posix

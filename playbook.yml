@@ -23,6 +23,15 @@
 
 - hosts: all
   become: true
+
+  vars_files:
+    - vars/swap.yml
+
+  roles:
+    - { role: geerlingguy.swap }
+
+- hosts: all
+  become: true
   name: Install NodeJS, PHP, and composer
 
   vars_files:
