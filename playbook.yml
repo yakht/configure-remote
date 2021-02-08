@@ -56,16 +56,16 @@
     - { role: geerlingguy.composer, tags: ["composer"] }
     - { role: geerlingguy.nodejs, tags: ["nodejs"] }
 
+- hosts: all
+  name: Set user configurations
   tasks:
     - name: Add npm-global bin directory to path (fish-shell)
-      become_user: "{{ ansible_user }}"
       ansible.builtin.copy:
         dest: "/home/{{ ansible_user }}/.config/fish/conf.d/npm-global.fish"
         content: |
           set PATH {{ npm_config_prefix }}/bin $PATH
       when: install_shell == "fish"
     - name: Set npm config prefix
-      become_user: "{{ ansible_user }}"
       command: "npm config set prefix {{ npm_config_prefix }}"
 
 - hosts: all
