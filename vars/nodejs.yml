@@ -1,2 +1,8 @@
 ---
 nodejs_version: "15.x"
+nodejs_npm_global_packages:
+  - angular-cli
+  - eslint
+  - gulp-cli
+  - vue-cli
+  - webpack-cli
