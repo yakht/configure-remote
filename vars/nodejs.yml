@@ -1,5 +1,6 @@
 ---
 nodejs_version: "15.x"
+npm_config_prefix: "/home/{{ ansible_user }}/.npm-global"
 nodejs_npm_global_packages:
   - angular-cli
   - eslint
