@@ -58,6 +58,9 @@
 
 - hosts: all
   name: Set user configurations
+  vars_files:
+    - vars/nodejs.yml
+    - vars/yakht.yml
   tasks:
     - name: Add npm-global bin directory to path (fish-shell)
       ansible.builtin.copy:
