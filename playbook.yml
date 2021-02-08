@@ -3,6 +3,10 @@
 # https://github.com/ansible/ansible/issues/57529#issuecomment-513143430
 - hosts: all
 
+# We need to know the user even when 'become'ing later on.
+# Some roles depend on 'ansible_user' for this but that may not
+# be present. See https://github.com/ansible/ansible/issues/23530
+# So, we set some facts ourselves.
 - hosts: all
   tasks:
     - name: Run whoami to determine username
@@ -10,6 +14,7 @@
       register: username
     - set_fact:
         username: "{{ username.stdout }}"
+        ansible_user: "{{ ansible_user_id }}"
 
 - hosts: all
   become: true

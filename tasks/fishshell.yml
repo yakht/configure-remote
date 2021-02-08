@@ -8,6 +8,7 @@
   register: fish_path
 
 - name: Change default shell
+  become: true
   user:
     name: "{{ username }}"
     shell: "{{ fish_path.stdout }}"
