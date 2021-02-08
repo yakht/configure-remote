@@ -5,12 +5,18 @@
     - vars/create-user.yml
 
   tasks:
+    - name: Create the primary group for the user
+      group:
+        name: "{{ username }}"
+
     - name: Create user for later runs
       user:
         name: "{{ username }}"
+        group: "{{ username }}"
         state: present
         groups: "admin,sudo"
         shell: "/bin/bash"
+        append: yes
 
     - name: Allow user to have passwordless sudo
       lineinfile:
